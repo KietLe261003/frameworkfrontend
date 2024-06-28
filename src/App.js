@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import {accountRoute,homeRoute} from './Routes/Index';
+import NotFoundPage from './Page/NotFoundPages/Index';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path='/'>
+          {homeRoute.map((route, index) => { return <Route key={index} path={route.path} element={<route.element />} /> })}
+        </Route>
+        <Route path='/Account'>
+          {accountRoute.map((route, index) => { return <Route key={index} path={route.path} element={<route.element />} /> })}
+        </Route>
+        <Route path='/*' element={<NotFoundPage />} />
+      </Routes>
     </div>
   );
 }
